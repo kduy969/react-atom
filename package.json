@@ -1,9 +1,13 @@
 {
-  "name": "react-atom",
+  "name": "reactive-atom",
   "version": "1.0.4",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kduy969/react-atom"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",

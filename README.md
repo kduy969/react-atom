@@ -1,5 +1,7 @@
 # REACT ATOM
 A state management library for React, follows bottom-up model ( similar with Jotai ), simple, zero-boilerplate setup, not depend to React framework ( can be used without React ). Basically you can easily define a piece of reactive data ( ATOM ) and use them anywhere in your React application, you can even compose multipe ATOMs to create another ATOM ( ATOM composition ). React-atom also include advance features like selector/piping for even more flexibility...
+## Install
+npm i reactive-atom
 ## Examples
 
 ### Basic usage
