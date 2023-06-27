@@ -1,0 +1,33 @@
+{
+  "name": "react-atom",
+  "version": "1.0.4",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
+    "build": "tsc",
+    "local-pack": "npm pack"
+  },
+  "keywords": [],
+  "author": "Duy Bui",
+  "license": "ISC",
+  "dependencies": {
+    "mitt": "^3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.13",
+    "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "@typescript-eslint/parser": "^5.60.0",
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.3"
+  }
+}
