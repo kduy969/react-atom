@@ -3,8 +3,8 @@ import { Pipe } from "./pipe/pipe";
 
 const defaultSelector = (a: any): any => a;
 
-type AtomSelector<T = any, R = T> = ((t: T) => R) | undefined | null;
-type ComposeSelector = (...args: any) => any;
+export type AtomSelector<T = any, R = T> = ((t: T) => R) | undefined | null;
+export type ComposeSelector = (...args: any) => any;
 
 const getParams = (atoms: Array<Atom>, selectors: Array<AtomSelector>) => {
   const params = atoms.map((atom, index) =>
@@ -23,18 +23,19 @@ export class ComposeAtom<T = any> extends Atom<T> {
 
   constructor(
     atoms: Array<Atom>,
-    selectors: Array<AtomSelector>,
+    selectors: Array<AtomSelector | null | undefined> | null | undefined,
     composeSelector: ComposeSelector,
     recalculatePipe?: Pipe<any>
   ) {
-    const params = getParams(atoms, selectors);
+    const filledSelectors = atoms.map((_, index)=> (selectors||[])[index] || defaultSelector);
+    const params = getParams(atoms, filledSelectors);
     const value = composeSelector(...params);
     super(value);
     this.recalculatePipe = recalculatePipe;
     this.recalculatePipe?.setOnOutput(this.doRecalculateAndUpdate);
     this.params = params;
     this.atoms = atoms;
-    this.selectors = selectors;
+    this.selectors = filledSelectors;
     this.composeSelector = composeSelector;
     this.subscribeToAtoms();
   }
@@ -95,3 +96,12 @@ export class ComposeAtom<T = any> extends Atom<T> {
     this.set(newValue);
   };
 }
+
+// export const atomAB = new ComposeAtom<number>(
+//   [atomA, atomB],
+//   [defaultSelector, defaultSelector],
+//   (a: number, b: number) => {
+//     console.log("calculate A + B");
+//     return a + b;
+//   },
+// );

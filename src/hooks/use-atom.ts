@@ -47,7 +47,7 @@ export type TSelector<T = any> = (v: T) => any;
 export function useAtom<A extends Atom | undefined, T = ExtractAtom<A>, R = T>(
   atom: A,
   selector: (v: T) => R = defaultSelector
-): A extends undefined ? [undefined, undefined] : [R, (v: T) => void] {
+): A extends undefined ? [undefined, undefined, undefined] : [R, (v: T) => void, A] {
   const listenerKeyRef = useRef<string>();
   const valueRef = useRef(atom ? selector(atom?.get()) : undefined);
   const [_, refresh] = useState<any>(null);
@@ -79,10 +79,10 @@ export function useAtom<A extends Atom | undefined, T = ExtractAtom<A>, R = T>(
   if (atom === undefined) {
     // probably typescript bug
     // @ts-ignore
-    return [undefined, undefined];
+    return [undefined, undefined, undefined];
   }
 
   // probably typescript bug
   // @ts-ignore
-  return [valueRef.current, set];
+  return [valueRef.current, set, atom];
 }
